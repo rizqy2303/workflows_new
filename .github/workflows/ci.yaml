@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout Code
       uses: actions/checkout@v3
 
@@ -15,13 +14,15 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.9' 
-        
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install mlflow
-        # Install requirements jika ada file requirements.txt
+        # Kita perlu menginstall dependencies project agar bisa jalan di 'local'
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # Jika ada requirements di dalam folder MLProject, install juga:
+        if [ -f MLProject/requirements.txt ]; then pip install -r MLProject/requirements.txt; fi
 
     - name: Run MLflow Project
-      run: mlflow run MLProject --no-conda
+      run: mlflow run MLProject --env-manager=local
