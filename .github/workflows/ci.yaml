@@ -23,5 +23,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt # Pastikan file requirements.txt ada!
 
-    - name: Run Python script
-      run: python modelling.py # Ganti jika nama file kamu berbeda
+    - name: Run modeling script
+  run: python MLProject/modelling.py
