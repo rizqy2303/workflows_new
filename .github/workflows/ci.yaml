@@ -19,10 +19,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install mlflow
-        # Kita perlu menginstall dependencies project agar bisa jalan di 'local'
+        # Install library yang dibutuhkan (pandas, scikit-learn, dll)
+        # Jika file requirements.txt ada di luar:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        # Jika ada requirements di dalam folder MLProject, install juga:
+        # Jika file requirements.txt ada di dalam folder MLProject:
         if [ -f MLProject/requirements.txt ]; then pip install -r MLProject/requirements.txt; fi
 
     - name: Run MLflow Project
-      run: mlflow run MLProject --env-manager=local
+    
+      run: mlflow run MLProject --env-manager=local --entry-point train
